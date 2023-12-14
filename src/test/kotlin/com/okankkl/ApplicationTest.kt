@@ -1,6 +1,6 @@
 package com.okankkl
 
-import com.okankkl.plugins.*
+import com.okankkl.controller.configureRouting
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*

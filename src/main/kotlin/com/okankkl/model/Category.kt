@@ -1,12 +1,14 @@
 package com.okankkl.model
 
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.*
 
+@Serializable
 data class Category(
-    val id : Int,
-    val name : String
+    var id : Int,
+    var name : String,
+    var product_count : Long? = null
 )
-
 object Categories : Table() {
     val id = integer("id").autoIncrement()
     val name = varchar("name",50)
