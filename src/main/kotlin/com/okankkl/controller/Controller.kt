@@ -8,6 +8,7 @@ import com.okankkl.repository.categoryRepository
 import com.okankkl.repository.productRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
@@ -36,10 +37,11 @@ fun Application.configureRouting() {
                 }
             }
 
-            post {
+            post("{}"){
                 try {
-                    val testProduct = Product(1,"name 24","description 2",2,18,150.0)
-                    val resultResponse = productRepository.addProduct(testProduct)
+
+                    var product = call.receive<Product>()
+                    val resultResponse = productRepository.addProduct(product)
                     call.respond(message = resultResponse)
 
                 }catch ( e : Exception){
@@ -49,8 +51,8 @@ fun Application.configureRouting() {
 
             post("/update"){
                 try {
-                    val testProduct = Product(1,"name 2","description 2",1,18,150.0)
-                    val resultResponse = productRepository.updateProduct(testProduct)
+                    var product = call.receive<Product>()
+                    val resultResponse = productRepository.updateProduct(product)
                     call.respond(message = resultResponse)
 
                 }catch ( e : Exception){
@@ -96,8 +98,8 @@ fun Application.configureRouting() {
 
             post {
                 try {
-                    val test = Category(10,"category B")
-                    val resultResponse = categoryRepository.addCategory(test)
+                    var category = call.receive<Category>()
+                    val resultResponse = categoryRepository.addCategory(category)
                     call.respond(message = resultResponse)
 
                 } catch ( e : Exception){
@@ -117,8 +119,8 @@ fun Application.configureRouting() {
 
             post("/update") {
                 try {
-                    val test = Category(10,"category B")
-                    val resultResponse = categoryRepository.updateCategory(test)
+                    var category = call.receive<Category>()
+                    val resultResponse = categoryRepository.updateCategory(category)
                     call.respond(message = resultResponse)
 
                 } catch ( e : Exception){
