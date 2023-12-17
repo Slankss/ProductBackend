@@ -37,9 +37,8 @@ fun Application.configureRouting() {
                 }
             }
 
-            post("{}"){
+            post(){
                 try {
-
                     var product = call.receive<Product>()
                     val resultResponse = productRepository.addProduct(product)
                     call.respond(message = resultResponse)
@@ -60,7 +59,7 @@ fun Application.configureRouting() {
                 }
             }
 
-            get("/delete"){
+            post("/delete"){
                 try {
                     val id = call.parameters["id"]?.toInt()
                     val resultResponse = productRepository.deleteProduct(id!!)
